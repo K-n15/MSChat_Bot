@@ -1,0 +1,37 @@
+INFO:LoreKeeper:start page logging
+INFO:LoreKeeper:[{'messaging': [{'sender': {'id': '123_FAKE_USER'}, 'message': {'text': 'Hello, bot!'}}]}]
+INFO:LoreKeeper:end page logging
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 13:35:23] "POST /webhook HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:05:46] "[31m[1mGET /webhook?hub.verify_token=my_temp_token&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe HTTP/1.1[0m" 415 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:06:16] "[31m[1mGET /webhook?hub.verify_token=my_temp_token&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe HTTP/1.1[0m" 415 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:06:49] "[31m[1mGET /webhook?hub.verify_token=MY_TEMP_TOKEN&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe HTTP/1.1[0m" 415 -
+INFO:LoreKeeper:start page logging
+INFO:LoreKeeper:[{'messaging': [{'sender': {'id': '123_FAKE_USER'}, 'message': {'text': 'Hello, bot!'}}]}]
+INFO:LoreKeeper:end page logging
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:29:52] "POST /webhook HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:30:50] "[31m[1mGET /webhook?hub.mode=subscribe&hub.verify_token=MY_TEMP_TOKEN&hub.challenge=12345 HTTP/1.1[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:30:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:33:38] "[31m[1mGET /webhook?hub.mode=subscribe&hub.verify_token=MY_TEMP_TOKEN&hub.challenge=12345 HTTP/1.1[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:33:38] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:33:39] "[31m[1mGET /webhook?hub.mode=subscribe&hub.verify_token=MY_TEMP_TOKEN&hub.challenge=12345 HTTP/1.1[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:38:15] "[31m[1mGET /webhook?hub.mode=subscribe&hub.verify_token=MY_TEMP_TOKEN&hub.challenge=12345 HTTP/1.1[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:38:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:38:16] "[31m[1mGET /webhook?hub.mode=subscribe&hub.verify_token=MY_TEMP_TOKEN&hub.challenge=12345 HTTP/1.1[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:38:52] "[31m[1mGET /webhook?hub.mode=subscribe&hub.verify_token=MY_TEMP_TOKEN&hub.challenge=12345 HTTP/1.1[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:38:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:38:53] "[31m[1mGET /webhook?hub.mode=subscribe&hub.verify_token=MY_TEMP_TOKEN&hub.challenge=12345 HTTP/1.1[0m" 405 -
+INFO:LoreKeeper:start page logging
+INFO:LoreKeeper:[{'messaging': [{'sender': {'id': '123_FAKE_USER'}, 'message': {'text': 'Hello, bot!'}}]}]
+INFO:LoreKeeper:end page logging
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:40:29] "POST /webhook HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:40:56] "[31m[1mGET /webhook?hub.mode=subscribe&hub.verify_token=MY_TEMP_TOKEN&hub.challenge=12345 HTTP/1.1[0m" 405 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:LoreKeeper:WEBHOOK-VERIFIED
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:41:41] "GET /webhook?hub.mode=subscribe&hub.verify_token=MY_TEMP_TOKEN&hub.challenge=12345 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:41:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:LoreKeeper:WEBHOOK-VERIFIED
+INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:56:09] "GET /webhook?hub.verify_token=MY_TEMP_TOKEN&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe HTTP/1.1" 200 -
