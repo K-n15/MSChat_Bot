@@ -1,6 +1,8 @@
 import  os, datetime, json, logging, hashlib
 from flask import Flask, request
+from dotenv import load_dotenv
 
+load_dotenv()
 
 app = Flask(__name__)
 logging.basicConfig(filename='myapp.log', level=logging.INFO)
@@ -13,7 +15,7 @@ def ReceiveWebhook():
         logger.info('start page logging')
         logger.info(body["entry"])
         logger.info('end page logging')
-        return "EVENT-RECEIVED",200
+        return "EVENT_RECEIVED",200
     return "PAGE_NOT_FOUND",404
 
 @app.route("/webhook",methods=['GET'])
@@ -22,9 +24,9 @@ def Verify():
     mode = request.args.get("hub.mode")
     token = request.args.get("hub.verify_token")
     challenge = request.args.get("hub.challenge")
-
-    if (mode == "subscribe" and token == "MY_TEMP_TOKEN"):
-        logger.info("WEBHOOK-VERIFIED")
+    if (mode == "subscribe" and token == os.getenv("MY_TOKEN")):
+        logger.info("WEBHOOK_VERIFIED")
         return challenge,200
     else:
+        logger.info("WEBHOOK_DENIED")
         return "Forbidden",403

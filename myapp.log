@@ -38,3 +38,44 @@ INFO:werkzeug:127.0.0.1 - - [12/Dec/2025 14:56:09] "GET /webhook?hub.verify_toke
 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:werkzeug:127.0.0.1 - - [13/Dec/2025 15:59:44] code 400, message Bad request version ('\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 15:59:44] "[31m[1m\x16\x03\x01\x07[\x01\x00\x07W\x03\x03ß\x9e:\x02T±\x1e\x18\x9d©ð\x08k\x91\x1f`½G°\x85¡\x03ðä\x7f \x1dý\x10\x82×² 9×\x11\x13g\x186Në\x94\x84\x8c÷\x88§\x07Ä\x0b»@áäÔ¸7×ôñ\x01\x83Z\x0c\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [13/Dec/2025 15:59:44] code 400, message Bad request version ('ä\x92´Ó¿¶\x03ª\x86¸,\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À')
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 15:59:44] "[31m[1m\x16\x03\x01\x07[\x01\x00\x07W\x03\x03;\x0c\x9bC(\x1aý\x8e&òPªRQVf\x1e1\x15ø\x04Ç®"\x1fì÷M§Ü2t \x95¡<\x7f§Á¾Lrd´^°\x01W½Û\x0c!\x19\x1dä\x92´Ó¿¶\x03ª\x86¸,\x00"\x13\x01\x13\x03\x13\x02À+À/Ì©Ì¨À,À0À[0m" 400 -
+ERROR:werkzeug:127.0.0.1 - - [13/Dec/2025 15:59:44] code 400, message Bad request version ('a\x8f}&ñ½õ×â½fÈÃ\x97w\x1bÝ±¨åÓ')
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 15:59:44] "[31m[1m\x16\x03\x01\x02\x8a\x01\x00\x02\x86\x03\x03\x07.î©ËÌ8â\x0bÛ©bûÔà¤ÂÔ÷=îKì_Ç·ì\x8côÂï\x80 a\x8f}&ñ½õ×â½fÈÃ\x97w\x1bÝ±¨åÓ\x1e[0m" 400 -
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 15:59:57] "[33mGET /webhooks?%20%20hub.mode=subscribe&%20%20hub.verify_token=MY_TOKEN&%20%20hub.challenge=1158201444 HTTP/1.1[0m" 404 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 16:00:42] "[31m[1mGET /webhook?%20%20hub.mode=subscribe&%20%20hub.verify_token=MY_TOKEN&%20%20hub.challenge=1158201444 HTTP/1.1[0m" 403 -
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 16:01:16] "[31m[1mGET /webhook?%20hub.mode=subscribe&%20%20hub.verify_token=MY_TOKEN&%20%20hub.challenge=1158201444 HTTP/1.1[0m" 403 -
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 16:01:28] "[31m[1mGET /webhook?%20hub.mode=subscribe&hub.verify_token=MY_TOKEN&hub.challenge=1158201444 HTTP/1.1[0m" 403 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:LoreKeeper:WEBHOOK_DENIED
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 16:02:21] "[31m[1mGET /webhook?%20hub.mode=subscribe&hub.verify_token=MY_TOKEN&hub.challenge=1158201444 HTTP/1.1[0m" 403 -
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 16:02:21] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:LoreKeeper:WEBHOOK_DENIED
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 16:02:52] "[31m[1mGET /webhook?%20hub.mode=subscribe&hub.verify_token=TESTING_TOKEN&hub.challenge=1158201444 HTTP/1.1[0m" 403 -
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:LoreKeeper:WEBHOOK_DENIED
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 16:03:08] "[31m[1mGET /webhook?%20hub.mode=subscribe&%20%20hub.verify_token=TESTING_TOKEN&%20%20hub.challenge=1158201444 HTTP/1.1[0m" 403 -
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:LoreKeeper:WEBHOOK_DENIED
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 16:03:15] "[31m[1mGET /webhook?%20%20hub.mode=subscribe&%20%20hub.verify_token=TESTING_TOKEN&%20%20hub.challenge=1158201444 HTTP/1.1[0m" 403 -
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:LoreKeeper:WEBHOOK_VERIFIED
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 16:04:41] "GET /webhook?hub.verify_token=TESTING_TOKEN&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe HTTP/1.1" 200 -
+INFO:LoreKeeper:REQUEST_VERIFY_ACCEPTED
+INFO:LoreKeeper:WEBHOOK_VERIFIED
+INFO:werkzeug:127.0.0.1 - - [13/Dec/2025 16:04:53] "GET /webhook?hub.verify_token=TESTING_TOKEN&hub.mode=subscribe&hub.challenge=CHALLENGE_ACCEPTED HTTP/1.1" 200 -
