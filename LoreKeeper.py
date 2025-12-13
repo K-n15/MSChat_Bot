@@ -1,4 +1,4 @@
-import  os, datetime, json, logging, hashlib, sys
+import  os, datetime, json, logging, hashlib, sys, _datetime
 from flask import Flask, request
 from dotenv import load_dotenv
 
@@ -39,4 +39,4 @@ def Verify():
     
 @app.route("/wakeup",method=['GET'])
 def WakeupCall():
-    logger.info("Wakeup call at")
+    return "Wake up call, OK", 200
