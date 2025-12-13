@@ -37,6 +37,6 @@ def Verify():
         logger.info("WEBHOOK_DENIED")
         return "Forbidden",403
     
-@app.route("/wakeup",method=['GET'])
+@app.route("/wakeup",methods=['GET'])
 def WakeupCall():
     return "Wake up call, OK", 200
