@@ -1,11 +1,17 @@
-import  os, datetime, json, logging, hashlib
+import  os, datetime, json, logging, hashlib, sys
 from flask import Flask, request
 from dotenv import load_dotenv
 
 load_dotenv()
 
 app = Flask(__name__)
-logging.basicConfig(filename='myapp.log', level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    stream=sys.stdout  # <--- This sends it to the Render Dashboard
+)
+# Use for debug
+# logging.basicConfig(filename='myapp.log', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 @app.route("/webhook",methods=['POST'])
@@ -30,3 +36,7 @@ def Verify():
     else:
         logger.info("WEBHOOK_DENIED")
         return "Forbidden",403
+    
+@app.route("/wakeup",method=['GET'])
+def WakeupCall():
+    logger.info("Wakeup call at")
