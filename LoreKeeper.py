@@ -43,14 +43,14 @@ def ReceiveWebhook():
                 if "message" in event:
                     sender_id = event["sender"]["id"]
                     text = event["message"].get("text", "No text found")
-                    print(f"✅ MESSAGE DETECTED from {sender_id}: {text}", flush=True)
+                    print(f"MESSAGE DETECTED from {sender_id}: {text}", flush=True)
                     
                     # Attempt to reply
                     send_message(sender_id, f"Echo: {text}")
 
                 # Case B: It is something else (Delivery receipt, read receipt)
                 else:
-                        print(f"ℹ️ Received non-message event: {event.keys()}", flush=True)
+                        print(f"Received non-message event: {event.keys()}", flush=True)
 
         print("=============== END REQUEST ===============\n", flush=True)
         return "EVENT_RECEIVED", 200
@@ -62,7 +62,7 @@ def send_message(recipient_id, message_text):
     headers = {
         "Content-Type": "application/json"
     }
-    data = json.dumps({
+    payload = json.dumps({
         "recipient": {
             "id": recipient_id
         },
@@ -70,8 +70,12 @@ def send_message(recipient_id, message_text):
             "text": message_text
         }
     })
-    url = f"https://graph.facebook.com/v21.0/me/messages?access_token={os.environ["PAGE_ACCESS_TOKEN"]}"
-    r = requests.post(url, headers=headers, data=data)
+    PAT = os.environ['PAGE_ACCESS_TOKEN']
+    url = f"https://graph.facebook.com/v24.0/me/messages?access_token={PAT}"
+    r = requests.post(url, headers=headers, json=payload)
     if r.status_code != 200:
         err = str(r.status_code) + " " + r.text
         logger.info(err)
+
+if __name__ == "__main__":
+    app.run(port=10000)
