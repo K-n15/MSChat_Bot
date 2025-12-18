@@ -38,7 +38,6 @@ def ReceiveWebhook():
     if body["object"] == "page":
         for entry in body["entry"]:
             for event in entry["messaging"]:
-                
                 if event.get("message"):
                     sender_id = event["sender"]["id"]
                     send_message(sender_id, "Heard that")
@@ -56,14 +55,14 @@ def send_message(recipient_id, message_text):
     headers = {
         "Content-Type": "application/json"
     }
-    payload = json.dumps({
+    payload = {
         "recipient": {
             "id": recipient_id
         },
         "message": {
             "text": message_text
         }
-    })
+    }
     PAT = os.getenv("PAGE_ACCESS_TOKEN")
     url = f"https://graph.facebook.com/v24.0/me/messages?access_token={PAT}"
     r = requests.post(url, headers=headers, json=payload)
