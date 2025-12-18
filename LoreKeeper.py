@@ -34,23 +34,31 @@ def WakeupCall():
 @app.route("/webhook",methods=['POST'])
 def ReceiveWebhook():
     body = request.json
-    if body["object"] == "page":
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", file=sys.stdout)
-        print("I RECEIVED A MESSAGE!", file=sys.stdout)
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", file=sys.stdout)
-        logger.info('start page logging')
-        logger.info(body["entry"])
-        logger.info('end page logging')
-        return "EVENT_RECEIVED",200
-    return "PAGE_NOT_FOUND",404
+    print("\n=============== INCOMING MESSAGE ===============", flush=True)
+    if body.get("object") == "page":
+        for entry in body["entry"]:
+            for event in entry.get("messaging", []):
+                
+                # Case A: It is a text message
+                if "message" in event:
+                    sender_id = event["sender"]["id"]
+                    text = event["message"].get("text", "No text found")
+                    print(f"✅ MESSAGE DETECTED from {sender_id}: {text}", flush=True)
+                    
+                    # Attempt to reply
+                    send_message(sender_id, f"Echo: {text}")
+
+                # Case B: It is something else (Delivery receipt, read receipt)
+                else:
+                        print(f"ℹ️ Received non-message event: {event.keys()}", flush=True)
+
+        print("=============== END REQUEST ===============\n", flush=True)
+        return "EVENT_RECEIVED", 200
+    else:
+        return "Not a Page Event", 404
 
 def send_message(recipient_id, message_text):
-
     logger.info("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
-
-    params = {
-        "access_token": os.environ["PAGE_ACCESS_TOKEN"]
-    }
     headers = {
         "Content-Type": "application/json"
     }
@@ -62,7 +70,8 @@ def send_message(recipient_id, message_text):
             "text": message_text
         }
     })
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+    url = f"https://graph.facebook.com/v21.0/me/messages?access_token={os.environ["PAGE_ACCESS_TOKEN"]}"
+    r = requests.post(url, headers=headers, data=data)
     if r.status_code != 200:
         err = str(r.status_code) + " " + r.text
         logger.info(err)
