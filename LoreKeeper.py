@@ -35,20 +35,14 @@ def WakeupCall():
 def ReceiveWebhook():
     body = request.json
     print("\n=============== INCOMING MESSAGE ===============", flush=True)
-    if body.get("object") == "page":
+    if body["object"] == "page":
         for entry in body["entry"]:
-            for event in entry.get("messaging", []):
+            for event in entry["messaging"]:
                 
-                # Case A: It is a text message
-                if "message" in event:
+                if event.get("message"):
                     sender_id = event["sender"]["id"]
-                    text = event["message"].get("text", "No text found")
-                    print(f"MESSAGE DETECTED from {sender_id}: {text}", flush=True)
-                    
-                    # Attempt to reply
-                    send_message(sender_id, f"Echo: {text}")
+                    send_message(sender_id, "Heard that")
 
-                # Case B: It is something else (Delivery receipt, read receipt)
                 else:
                         print(f"Received non-message event: {event.keys()}", flush=True)
 
@@ -70,7 +64,7 @@ def send_message(recipient_id, message_text):
             "text": message_text
         }
     })
-    PAT = os.environ['PAGE_ACCESS_TOKEN']
+    PAT = os.getenv("PAGE_ACCESS_TOKEN")
     url = f"https://graph.facebook.com/v24.0/me/messages?access_token={PAT}"
     r = requests.post(url, headers=headers, json=payload)
     if r.status_code != 200:
