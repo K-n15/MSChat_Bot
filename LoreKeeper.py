@@ -1,4 +1,5 @@
-import  os, json, logging, hashlib, sys, requests
+import  os, logging, sys, requests
+from Seabed import Lobster
 from flask import Flask, request
 from dotenv import load_dotenv
 
@@ -41,7 +42,11 @@ def ReceiveWebhook():
                 if event.get("message"):
                     sender_id = event["sender"]["id"]
                     send_message(sender_id, "Heard that")
-
+                elif event.get("message") == "news":
+                    print("\n=============== SENDING NEWS ===============", flush=True)
+                    sender_id = event["sender"]["id"]
+                    latestNews,url = Scraper.getLatestNew()
+                    send_message(sender_id, latestNews+'\n'+url)
                 else:
                         print(f"Received non-message event: {event.keys()}", flush=True)
 
@@ -71,4 +76,5 @@ def send_message(recipient_id, message_text):
         logger.info(err)
 
 if __name__ == "__main__":
+    Scraper = Lobster()
     app.run(port=10000)
