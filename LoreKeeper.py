@@ -39,10 +39,10 @@ def ReceiveWebhook():
     if body["object"] == "page":
         for entry in body["entry"]:
             for event in entry["messaging"]:
-                if event.get("message"):
+                if event.get("message") == "news":
                     sender_id = event["sender"]["id"]
                     send_message(sender_id, "Heard that")
-                elif event.get("message") == "news":
+                elif event.get("message"):
                     print("\n=============== SENDING NEWS ===============", flush=True)
                     sender_id = event["sender"]["id"]
                     latestNews,url = Scraper.getLatestNew()
