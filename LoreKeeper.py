@@ -4,6 +4,7 @@ from flask import Flask, request
 from dotenv import load_dotenv
 
 load_dotenv()
+Scraper = Lobster()
 
 app = Flask(__name__)
 logging.basicConfig(
@@ -76,5 +77,4 @@ def send_message(recipient_id, message_text):
         logger.info(err)
 
 if __name__ == "__main__":
-    Scraper = Lobster()
     app.run(port=10000)
