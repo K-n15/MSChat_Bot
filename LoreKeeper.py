@@ -34,7 +34,7 @@ def Verify():
 def WakeupCall():
     return "Wake up call, OK", 200
 
-@app.route("/testHook",method=['GET'])
+@app.route("/testHook",methods=['GET'])
 def HookTest():
     affirmation = request.headers.get('TestToken')
     if affirmation != TestToken:
