@@ -27,10 +27,10 @@ jobs:
 
       - name: Run Test Script
         env:
-          TEST_TOKEN: ${{ secrets.TEST_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY}}
+          TEST_TOKEN: ${{secrets.TEST_TOKEN}}
+          GEMINI_API_KEY: ${{secrets.GEMINI_API_KEY}}
         run: python tests/test_Deploy.py
 
       - name: Deploy to Render
         run: |
-          curl "${{ secrets.RENDER_DEPLOY_HOOK }}"
+          curl "${{secrets.RENDER_DEPLOY_HOOK }}"
