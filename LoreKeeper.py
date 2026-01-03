@@ -1,4 +1,4 @@
-import  os, logging, sys, requests
+import  os, logging, sys, requests, threading
 from Seabed import Lobster
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
@@ -75,6 +75,19 @@ def ReceiveWebhook():
         return "EVENT_RECEIVED", 200
     else:
         return "Not a Page Event", 404
+    
+@app.route("/latestRelease",methods=['GET'])
+def runCheck():
+    lastNews,code = Scraper.FirstNewDetail()
+    if Scraper.currentTitle() != lastNews and code == 200:
+        #Thread to handle scraping task
+        thread = threading.Thread(target=Scraper.Scavenging())
+        #To prevent Deployment Timeout Error
+        thread.daemon = True
+        thread.start()
+        print("Article updated")
+        return jsonify({"status":"Success","message":"Article Updated"}),code
+    return jsonify({"status":"Error","message":lastNews}),code
 
 def send_message(recipient_id, message_text):
     logger.info("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))

@@ -14,7 +14,6 @@ def TestHookLogic():
         print(f"Server Error: {response.status_code}")
         sys.exit(1)
 
-    # 2. Check Content (The real fix)
     json_data = response.get_json()
     if "error" in json_data or "API Error" in str(json_data):
         print(f"AI Generation Failed: {json_data}")

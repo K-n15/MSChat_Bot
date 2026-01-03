@@ -18,6 +18,9 @@ class Lobster:
     def getLastRelease(self):
         return self.LastestRelease
     
+    def currentTitle(self):
+        return self.LatestTitle
+    
     def Scavenge(self):
         x = self.Scavenging()
         return "OK" if x else x
@@ -73,6 +76,16 @@ class Lobster:
         except Exception as e:
             print(f"--- Network Failed: {e} ---")
             return "Error : " + str(e)
+        
+    def FirstNewDetail(self):
+        latestNew,code = self.LobsterQuest(self.BaseUrl+'/wiki/Main_Page')
+        if code != 200:
+            return "Error ["+str(code)+"] : "+latestNew.text,code
+        soupBase = BeautifulSoup(latestNew.text,'html.parser')
+
+        FilterTitle = soupBase.find("div",{"id":"MainPage_latest_news_text","class":"latest_news_text"})
+        FirstNews = FilterTitle.find('a')
+        return FirstNews.text,code
 
     def Scavenging(self):
         latestNew,code = self.LobsterQuest(self.BaseUrl+'/wiki/Main_Page')
