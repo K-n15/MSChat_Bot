@@ -14,6 +14,9 @@ class Lobster:
     def getLatestNew(self):
         return self.LatestSums,self.FullUrl
     
+    def getLastRelease(self):
+        return self.LastestRelease
+    
     def Scavenge(self):
         x = self.Scavenging()
         return "OK" if x else x
@@ -76,7 +79,7 @@ class Lobster:
         FilterTitle = soupBase.find("div",{"id":"MainPage_latest_news_text","class":"latest_news_text"})
         FirstNews = FilterTitle.find('a')
         self.LatestTitle = FirstNews.text
-        self.FullUrl = FirstNews['href']
+        self.FullUrl = self.BaseUrl+FirstNews['href']
 
         Detail = self.LobsterQuest(self.BaseUrl+self.FullUrl)
         if latestNew.status_code != 200:

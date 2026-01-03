@@ -1,10 +1,11 @@
 import  os, logging, sys, requests
 from Seabed import Lobster
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 
 load_dotenv()
 Scraper = Lobster()
+TestToken = os.getenv("TEST_TOKEN")
 
 app = Flask(__name__)
 logging.basicConfig(
@@ -33,6 +34,25 @@ def Verify():
 def WakeupCall():
     return "Wake up call, OK", 200
 
+@app.route("/testHook",method=['GET'])
+def HookTest():
+    affirmation = request.headers.get('TestToken')
+    if affirmation != TestToken:
+        return jsonify({"status":"Error","message":"Unauthorized access"}),403
+    try:
+        scrapper = Lobster()
+        testScrap,url = scrapper.getLatestNew()
+        if testScrap:
+            return jsonify({
+                "status":"Success",
+                "scraped_data_len":len(testScrap),
+                "data_sample":testScrap[:100]
+            }), 200
+        raise ValueError("Fail to gather data")
+    except Exception as e:
+        return jsonify({"status":"Error","message":str(e)}),500
+    
+    
 @app.route("/webhook",methods=['POST'])
 def ReceiveWebhook():
     body = request.json
@@ -49,7 +69,7 @@ def ReceiveWebhook():
                     latestNews,url = Scraper.getLatestNew()
                     send_message(sender_id, latestNews+'\n'+url)
                 else:
-                        print(f"Received non-message event: {event.keys()}", flush=True)
+                    print(f"Received non-message event: {event.keys()}", flush=True)
 
         print("=============== END REQUEST ===============\n", flush=True)
         return "EVENT_RECEIVED", 200
