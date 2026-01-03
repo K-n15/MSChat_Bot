@@ -1,6 +1,7 @@
 import requests, os
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
+from urllib3.util.retry import Retry
 
 class Lobster:
     def __init__(self):
@@ -22,22 +23,25 @@ class Lobster:
         return "OK" if x else x
 
     def LobsterQuest(self,url):
+        retry = Retry(
+            total=3,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["GET"]
+        )
+
+        session = requests.Session()
+        adapter = requests.adapters.HTTPAdapter(max_retries=retry)
+        session.mount('https://', adapter)
+        session.mount('http://', adapter)
+
         headers = {"User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141 Safari/537.36"}
-        #2 retry chances
-        exc,err = None,None
-        for i in range(2):
-            try:
-                response = requests.get(url,headers=headers,timeout=10)
-                status = response.status_code
-                if status == 200:
-                    return response
-                else:
-                    err = response
-                    continue
-            except Exception as e:
-                exc = e
-                continue
-        return exc if err else err
+        try:
+            response = requests.get(url,headers=headers,timeout=10)
+            response.raise_for_status()
+            return response, response.status_code
+        except Exception as e:
+            return f"{e}",response.status_code
 
     def Conclude(self,context):
         load_dotenv()
@@ -71,9 +75,9 @@ class Lobster:
             return "Error : " + str(e)
 
     def Scavenging(self):
-        latestNew = self.LobsterQuest(self.BaseUrl+'/wiki/Main_Page')
-        if latestNew.status_code != 200:
-            return "Error ["+str(latestNew.status_code)+"] : "+latestNew.text
+        latestNew,code = self.LobsterQuest(self.BaseUrl+'/wiki/Main_Page')
+        if code != 200:
+            return "Error ["+str(code)+"] : "+latestNew.text
         soupBase = BeautifulSoup(latestNew.text,'html.parser')
 
         FilterTitle = soupBase.find("div",{"id":"MainPage_latest_news_text","class":"latest_news_text"})
@@ -81,9 +85,9 @@ class Lobster:
         self.LatestTitle = FirstNews.text
         self.FullUrl = self.BaseUrl+FirstNews['href']
 
-        Detail = self.LobsterQuest(self.BaseUrl+self.FullUrl)
-        if latestNew.status_code != 200:
-            return "Error ["+str(Detail.status_code)+"] : "+Detail.text
+        Detail,code = self.LobsterQuest(self.BaseUrl+self.FullUrl)
+        if code != 200:
+            return "Error ["+str(code)+"] : "+Detail.text
         stock = BeautifulSoup(Detail.text,'html.parser')
 
         FilterDetail = stock.find("div",{"id":"bodyContent"})
