@@ -4,7 +4,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from MSChat_Bot.LoreKeeper import app,TestToken
+from LoreKeeper import app,TestToken
 
 def TestHookLogic():
     client = app.test_client()
