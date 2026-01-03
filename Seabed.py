@@ -41,7 +41,7 @@ class Lobster:
             response.raise_for_status()
             return response, response.status_code
         except Exception as e:
-            return f"{e}",response.status_code
+            return f"{e}",500
 
     def Conclude(self,context):
         load_dotenv()
@@ -84,8 +84,9 @@ class Lobster:
         FirstNews = FilterTitle.find('a')
         self.LatestTitle = FirstNews.text
         self.FullUrl = self.BaseUrl+FirstNews['href']
+        routeUrl = FirstNews['href']
 
-        Detail,code = self.LobsterQuest(self.BaseUrl+self.FullUrl)
+        Detail,code = self.LobsterQuest(self.BaseUrl+routeUrl)
         if code != 200:
             return "Error ["+str(code)+"] : "+Detail.text
         stock = BeautifulSoup(Detail.text,'html.parser')
