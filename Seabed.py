@@ -100,7 +100,3 @@ class Lobster:
         summarize = self.Conclude(context)
         print("Success")
         self.LatestSums  = self.LastestRelease + ' : ' + self.LatestTitle + '\n' + summarize
-
-if __name__ == '__main__':
-    seafood = Lobster()
-    print(seafood.getLatestNew())
